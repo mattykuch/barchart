@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Barchart</title>
+
+		<!-- CSS libraries -->
+
+
+		<!-- Custom CSS styles -->
+		<link href="style.css" rel="stylesheet" type="text/css" >
+	</head>
+	<body>
+		<div class="container">
+			<h3> Top 100 : Best Performing O'level Schools in Uganda</h3>
+			<h4> The length of each bar shows the average percentage of students who achieved a 1st Grade in UCE, from 2000 to 2015</h4>
+			<div id="initial">
+				<strong></strong>
+
+			</div>		
+
+			<div id="barchart"> <!-- barchart container --> </div>
+		</div> 
+		<div id="footer">
+				<strong>Data sources</strong> : Data from New Vision Newspaper: 24th January 2017, Article by Conan Busingye
+			</div>
+
+
+		<!-- Tooltip div -->
+		<div id="tooltip">
+		<p class="name"></p>
+		<p class="value"></p>
+		</div>
+
+
+		<!-- JS Libraries -->
+		<script src="d3.js" charset="utf-8"></script>
+
+		<!-- Custom JS code -->
+		<script src="barchart.js"></script>
+	</body>
+</html>
