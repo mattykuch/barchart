@@ -11,16 +11,21 @@ var svg = d3.select("#barchart")
 
 d3.csv("data/olevelperformancedata.csv", function(data) {
 
-	svg.selectAll("rect")
-		.data(data)
-		.enter()
-		.append("rect")
-		.attr("x",0)
+	data.sort(function(a, b) {
+		return d3.descending(a.pAverage, b.pAverage)
+	});
+
+	var rects = svg.selectAll("rect")
+					.data(data)
+					.enter()
+					.append("rect");
+
+	rects.attr("x",0)
 		.attr("y", function(d, i) {
 			return i*10;
 		})
 		.attr("width", function(d) {
-			return +d.pAverage * 10 ;
+			return d.pAverage * 10 ;
 		})
 		.attr("height",8);
 });
