@@ -1,11 +1,19 @@
-//Store width and height in variables
+//Store width, height and margin in variables
 var w = 500;
-var h = 1700;
+var h = 1500;
+var margin = {top: 40, right: 10, bottom: 20, left: 50};
 
-// Scale the width
+// Scale the width and height
 var xScale = d3.scale.linear()
-                    .domain([0, 99.1])
-                    .range([0,w]);
+                .range([0,w - margin.right - margin.left]);
+
+var yScale = d3.scale.ordinal()
+                .rangeRoundBands([margin.top, h - margin.bottom],0.2);
+
+// Creat Axes i.e. xAxis and yAxis
+var xAxis = d3.svg.axis()
+              .scale(xScale)
+              .orient("top")
 
 // Create SVG 
 var svg = d3.select("#barchart")
@@ -57,20 +65,34 @@ d3.csv("data/olevelperformancedata.csv", function(data) {
 	data.sort(function(a, b) {
 		return d3.descending(a.pAverage, b.pAverage)
 	});
+  //Setting a dynamic domain for the xScale based on Data
+  xScale.domain([0, d3.max(data, function(d) {
+    return +d.pAverage;
+  }) ]);
 
+  //Setting a dynamic domain for the yScale based on Data
+  yScale.domain(d3.range(data.length));
+
+  //Rendering the xAxis
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .call(xAxis)
+
+  // Rendering the rectangles
 	var rects = svg.selectAll("rect")
 					.data(data)
 					.enter()
 					.append("rect");
 
-	rects.attr("x",0)
+	rects.attr("x",margin.left)
 		.attr("y", function(d, i) {
-			return i*10;
+			return yScale(i);
 		})
 		.attr("width", function(d) {
 			return xScale(d.pAverage); 
 		})
-		.attr("height",8)
+		.attr("height",yScale.rangeBand)
 		.on("mouseover", hoveron)
 		.on("mouseout", hoverout)
 		.style("cursor", "pointer")
