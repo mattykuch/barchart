@@ -3,11 +3,27 @@ body {
 }
 
 #barchart {
-	width: 600px;
-	height: 1500px;
+	width: 560px;
+	height: 1700px;
+	border: 1px solid silver;
+	background: #E6E6E6;
+	float: right;
+}
+
+#barchart p {
+	margin-left: 5px;
+}
+
+#barchart2 {
+	width: 560px;
+	height: 1700px;
 	border: 1px solid silver;
 	background: #E6E6E6;
 	float: left;
+}
+
+#barchart2 p {
+	margin-left: 5px;
 }
 
 #tooltip {
@@ -15,7 +31,7 @@ body {
 	z-index: 2;
 	background: #fff;
 	border-radius: 4px;
-	width: 115px;
+	width: 160px;
 	height: 55px;
 	color: black;
 	font-size: 14px;
@@ -32,10 +48,34 @@ body {
 #tooltip p.value {
 	font-weight: bold;
 }
-
-
+#tooltip2 {
+	position: absolute;
+	z-index: 2;
+	background: #fff;
+	border-radius: 4px;
+	width: 160px;
+	height: 55px;
+	color: black;
+	font-size: 14px;
+	padding: 5px;
+	top: -150px;
+	left: -150px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
+
+#tooltip2 p {
+	margin: 0;
+}
+
+#tooltip2 p.value {
+	font-weight: bold;
+}
+
 #initial {
+	font-size: 1.2rem;
+	float: left;
+}
+#initial2 {
 	font-size: 1.2rem;
 	float: left;
 }
@@ -44,7 +84,7 @@ body {
 
 .container {
 	width: 1200px;
-	height: 1600px;
+	height: 1800px;
 	margin: 25px auto 25px auto;
 	padding: 50px 50px 50px 50px;
 	background-color: white;
@@ -67,5 +107,16 @@ body {
 }
 .axis text {
 	font-family: sans-serif;
-	font-size: 11px;
+	font-size: 9px;
+}
+
+.axis2 path,
+.axis2 line {
+	fill: none;
+	stroke:black;
+	shape-rendering: crispEdges;
+}
+.axis2 text {
+	font-family: sans-serif;
+	font-size: 9px;
 }

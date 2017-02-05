@@ -13,14 +13,17 @@ var yScale = d3.scale.ordinal()
 // Creat Axes i.e. xAxis and yAxis
 var xAxis = d3.svg.axis()
               .scale(xScale)
-              .orient("top")
+              .orient("top");
+
+var yAxis = d3.svg.axis()
+              .scale(yScale)
+              .orient("left");
 
 // Create SVG 
 var svg = d3.select("#barchart")
 			.append("svg")
 			.attr("width", w)
 			.attr("height", h);
-
 
 // Logic to handle Tooltip on Hover of Bar
 var hoveron = function(d) {
@@ -71,13 +74,19 @@ d3.csv("data/olevelperformancedata.csv", function(data) {
   }) ]);
 
   //Setting a dynamic domain for the yScale based on Data
-  yScale.domain(d3.range(data.length));
+  yScale.domain(data.map(function(d) { return d.rank; } ));
 
   //Rendering the xAxis
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(xAxis)
+      .call(xAxis);
+
+  //Rendering the yAxis
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + (margin.left -5)  +  ",0)")
+      .call(yAxis);
 
   // Rendering the rectangles
 	var rects = svg.selectAll("rect")
@@ -85,17 +94,25 @@ d3.csv("data/olevelperformancedata.csv", function(data) {
 					.enter()
 					.append("rect");
 
-	rects.attr("x",margin.left)
-		.attr("y", function(d, i) {
-			return yScale(i);
-		})
-		.attr("width", function(d) {
-			return xScale(d.pAverage); 
-		})
-		.attr("height",yScale.rangeBand)
-		.on("mouseover", hoveron)
-		.on("mouseout", hoverout)
-		.style("cursor", "pointer")
-        .style("stroke", "#777")
-        .style("fill", "Steelblue");
+    rects.attr("x", margin.left)
+      .attr("y", function(d, i) {
+        return yScale(d.rank);
+      })
+      .attr("width", function(d) {
+        return xScale(d.pAverage); 
+      })
+      .attr("height",yScale.rangeBand)
+  		.on("mouseover", hoveron)
+  		.on("mouseout", hoverout)
+  		.style("cursor", "pointer")
+          .style("stroke", "#777")
+          .style("fill", "Steelblue");
+
+//Transitions
+  //rects.transition()
+        //.duration(1500)
+        //.attr("x", margin.left)
+        //.attr("width", function(d) {
+      //return w - margin.left - xScale(d.pAverage); 
+    //});
 });
