@@ -3,7 +3,7 @@ body {
 }
 
 #barchart {
-	width: 1000px;
+	width: 500px;
 	height: 1000px;
 	border: 1px solid silver;
 	background: #E6E6E6;
@@ -13,7 +13,7 @@ body {
 #tooltip {
 	position: absolute;
 	z-index: 2;
-	background: rgba(255,255,255,0.8);
+	background: #fff;
 	border-radius: 4px;
 	width: 115px;
 	height: 55px;

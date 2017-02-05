@@ -1,13 +1,21 @@
+//Store width and height in variables
+var w = 500;
+var h = 1700;
+
+// Scale the width
+var xScale = d3.scale.linear()
+                    .domain([0, 99.1])
+                    .range([0,w]);
+
 // Create SVG 
 var svg = d3.select("#barchart")
 			.append("svg")
-			.attr("width", 1000)
-			.attr("height", 3400);
+			.attr("width", w)
+			.attr("height", h);
 
 
 // Logic to handle Tooltip on Hover of Bar
 var hoveron = function(d) {
-      console.log('d', d, 'event', event);
       var div = document.getElementById('tooltip');
       div.style.left = event.pageX + 'px';
       div.style.top = event.pageY + 'px';
@@ -60,7 +68,7 @@ d3.csv("data/olevelperformancedata.csv", function(data) {
 			return i*10;
 		})
 		.attr("width", function(d) {
-			return d.pAverage * 10; 
+			return xScale(d.pAverage); 
 		})
 		.attr("height",8)
 		.on("mouseover", hoveron)
